@@ -14,19 +14,9 @@ import (
 
 type options struct {
 	p                   *persistent.Options
-	name                string
 }
 
 func (o *options) AddFlags(cmd *cobra.Command) {
-	cmd.Flags().StringVar(
-		&o.name,
-		"name",
-		"",
-		"name of propagation directive",
-	)
-	cmd.MarkFlagRequired("name") //nolint:errcheck
-
-	cmd.MarkFlagRequired("into-path") //nolint:errcheck
 }
 
 func (o *options) Run(cmd *cobra.Command, _ []string) error {
@@ -44,9 +34,9 @@ func (o *options) Run(cmd *cobra.Command, _ []string) error {
 	if err != nil {
 		return err
 	}
-
+	fmt.Printf("Propagation Directives in the gittuf root of trust:\n")
 	for directive, pd := range directives {
-		fmt.Printf("Current propagation directives:%d: %v\n", directive, pd)
+		fmt.Printf("%d: %v\n", directive, pd)
 	}
 
 	return nil 

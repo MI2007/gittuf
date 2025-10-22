@@ -917,7 +917,7 @@ func (r *Repository) RemovePropagationDirective(ctx context.Context, signer ssli
 	return r.updateRootMetadata(ctx, state, signer, rootMetadata, commitMessage, options.CreateRSLEntry, signCommit)
 }
 
-// ListPropagationDirectives lists all propagation directives defined in the
+// GetPropagationDirectives lists all propagation directives defined in the
 // root metadata.
 func (r *Repository) GetPropagationDirectives(ctx context.Context, signer sslibdsse.SignerVerifier, signCommit bool) ([]tuf.PropagationDirective, error) {
 	if signCommit {
@@ -944,12 +944,12 @@ func (r *Repository) GetPropagationDirectives(ctx context.Context, signer sslibd
 		return nil, err
 	}
 
-	propagation_directives:= rootMetadata.GetPropagationDirectives()
-	if propagation_directives == nil {
+	propagationDirectives:= rootMetadata.GetPropagationDirectives()
+	if propagationDirectives == nil {
 		fmt.Println("No propagation directives found in root metadata")
 	}
 
-	return propagation_directives, nil
+	return propagationDirectives, nil
 }
 
 // AddHook defines the workflow for adding a file to be executed as a hook. It
